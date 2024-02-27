@@ -16,9 +16,9 @@ pipeline.scheduler = EulerAncestralDiscreteScheduler.from_config(
     pipeline.scheduler.config, timestep_spacing='trailing'
 )
 pipeline.to('cuda:0')
+
 # Run the pipeline
 cond = Image.open(requests.get("https://d.skis.ltd/nrp/sample-data/0_cond.png", stream=True).raw)
 depth = Image.open(requests.get("https://d.skis.ltd/nrp/sample-data/0_depth.png", stream=True).raw)
 result = pipeline(cond, depth_image=depth, num_inference_steps=36).images[0]
-result.show()
 result.save("output.png")

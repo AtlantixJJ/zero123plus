@@ -349,8 +349,7 @@ class Zero123PlusPipeline(diffusers.StableDiffusionPipeline):
         if depth_image is not None and hasattr(self.unet, "controlnet"):
             depth_image = to_rgb_image(depth_image)
             depth_image = self.depth_transforms_multi(depth_image).to(
-                device=self.unet.controlnet.device, dtype=self.unet.controlnet.dtype
-            )
+                device=self.unet.controlnet.device, dtype=self.unet.controlnet.dtype)
         image = image_1.to(device=self.vae.device, dtype=self.vae.dtype)
         image_2 = image_2.to(device=self.vae.device, dtype=self.vae.dtype)
         cond_lat = self.encode_condition_image(image)
